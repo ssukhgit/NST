@@ -3,7 +3,7 @@ import torchvision.transforms as transforms
 import torchvision.utils as vutils
 import torch.utils.data as data
 from os import listdir
-from os.path import join
+from os.path import join, splitext
 import numpy as np
 import torch
 import os
@@ -12,7 +12,7 @@ from torch.autograd import Variable
 import numpy as np
 
 def is_image_file(filename):
-    return any(filename.endswith(extension) for extension in [".png", ".jpg", ".jpeg"])
+    return any(filename.lower().endswith(extension) for extension in [".png", ".jpg", ".jpeg"])
 
 def default_loader(path):
     return Image.open(path).convert('RGB')
@@ -21,20 +21,23 @@ class Dataset(data.Dataset):
     def __init__(self,contentPath,stylePath,fineSize):
         super(Dataset,self).__init__()
         self.contentPath = contentPath
-        self.image_list = [x for x in listdir(contentPath) if is_image_file(x)]
+        self.image_list_content = [x for x in listdir(contentPath) if is_image_file(x)]
+        self.image_list_style = [x for x in listdir(stylePath) if is_image_file(x)]
         self.stylePath = stylePath
         self.fineSize = fineSize
-        #self.normalize = transforms.Normalize(mean=[103.939,116.779,123.68],std=[1, 1, 1])
-        #normalize = transforms.Normalize(mean=[123.68,103.939,116.779],std=[1, 1, 1])
+
+        # Collect all valid images from both directories
+        self.content_images = {splitext(fname)[0]: fname for fname in listdir(contentPath) if is_image_file(fname)}
+        self.style_images = {splitext(fname)[0]: fname for fname in listdir(stylePath) if is_image_file(fname)}
+
         self.prep = transforms.Compose([
-                    transforms.Scale(fineSize),
+                    transforms.Resize(fineSize),
                     transforms.ToTensor(),
-                    #transforms.Lambda(lambda x: x[torch.LongTensor([2,1,0])]), #turn to BGR
                     ])
 
     def __getitem__(self,index):
-        contentImgPath = os.path.join(self.contentPath,self.image_list[index])
-        styleImgPath = os.path.join(self.stylePath,self.image_list[index])
+        contentImgPath = os.path.join(self.contentPath,self.image_list_content[index])
+        styleImgPath = os.path.join(self.stylePath,self.image_list_style[index])
         contentImg = default_loader(contentImgPath)
         styleImg = default_loader(styleImgPath)
 
@@ -58,8 +61,7 @@ class Dataset(data.Dataset):
         # Preprocess Images
         contentImg = transforms.ToTensor()(contentImg)
         styleImg = transforms.ToTensor()(styleImg)
-        return contentImg.squeeze(0),styleImg.squeeze(0),self.image_list[index]
+        return contentImg.squeeze(0),styleImg.squeeze(0),self.image_list_content[index]
 
     def __len__(self):
-        # You should change 0 to the total size of your dataset.
-        return len(self.image_list)
+        return len(self.image_list_content)

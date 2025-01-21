@@ -7,7 +7,7 @@ import torchvision.utils as vutils
 import torchvision.datasets as datasets
 from Loader import Dataset
 from util import *
-import scipy.misc
+# import scipy.misc
 #from torch.utils.serialization import load_lua
 import time
 
