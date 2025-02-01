@@ -7,6 +7,8 @@ from WCT.style_transfer import style_transfer
 from io import BytesIO
 import os
 import torch
+import sys
+import subprocess
 
 # Configuration for the WCT (whitening and coloring transform), pretrained encoders and decoders
 config = {
@@ -136,21 +138,25 @@ if st.session_state.button2_clicked:
                 input_image_path = "input/horse2zebra/testB/test.jpg"
                 with open(input_image_path, "wb") as f:
                     f.write(uploaded_file.getvalue())
+                    
                 
                 # 2. Call the CycleGAN test script.
                 #    Adjust the paths/args to match your model name and checkpoint directory.
-                command = (
-                    "python CycleGAN/test.py "
-                    "--dataroot ./input/horse2zebra/testB "
-                    "--checkpoints_dir ./CycleGAN/checkpoints "
-                    "--name h2z_2_cyclegan "
-                    "--model test "
-                    "--no_dropout "
-                    "--preprocess none "
-                    "--results_dir ./results "
-                    "--gpu_ids -1"
-                )
-                os.system(command)
+                python_path = sys.executable  # Ensure same Python environment
+
+                command = [
+                    python_path,
+                    "CycleGAN/test.py",
+                    "--dataroot", "./input/horse2zebra/testB",
+                    "--checkpoints_dir", "./CycleGAN/checkpoints",
+                    "--name", "h2z_2_cyclegan",
+                    "--model", "test",
+                    "--no_dropout",
+                    "--preprocess", "none",
+                    "--results_dir", "./results",
+                    "--gpu_ids", "-1"
+                ]
+                subprocess.run(command)
                 
                 # 3. The output image appears in:
                 #    CycleGAN/results/h2z_2_cyclegan/test_latest/images/test_fake_B.png
