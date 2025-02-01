@@ -2,7 +2,6 @@ dominate==2.9.1
 numpy
 Pillow==11.1.0
 Requests==2.32.3
-scipy==1.10.1
 torch==2.6.0
 torchvision==0.21.0
 visdom==0.2.4
