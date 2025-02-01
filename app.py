@@ -6,7 +6,7 @@ from torchvision.transforms.functional import to_pil_image
 from WCT.style_transfer import style_transfer
 from io import BytesIO
 import os
-import torch
+# import torch
 
 # Configuration for the WCT (whitening and coloring transform), pretrained encoders and decoders
 config = {
@@ -25,6 +25,9 @@ config = {
 
 # Title
 st.title("Neural Style Transfer App")
+
+import torch
+st.write("PyTorch version:", torch.__version__)
 
 # Initialize session state for button tracking
 if "button1_clicked" not in st.session_state:
