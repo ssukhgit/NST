@@ -6,7 +6,7 @@ from torchvision.transforms.functional import to_pil_image
 from WCT.style_transfer import style_transfer
 from io import BytesIO
 import os
-# import torch
+import torch
 
 # Configuration for the WCT (whitening and coloring transform), pretrained encoders and decoders
 config = {
