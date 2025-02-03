@@ -28,9 +28,6 @@ config = {
 # Title
 st.title("Neural Style Transfer App")
 
-import torch
-st.write("PyTorch version:", torch.__version__)
-
 # Initialize session state for button tracking
 if "button1_clicked" not in st.session_state:
     st.session_state.button1_clicked = False
