@@ -27,6 +27,9 @@ CycleGAN has been trained, the resulting generator is stored in /checkpoints dir
 This project is deployed on Streamlit Cloud. Every time the repository is updated, the app is redeployed automatically. Files saved during runtime (e.g., user-uploaded images) are stored in an ephemeral container, so they will not persist across sessions.
 Visit the live app here: [Streamlit App](https://styletransferwctcyclegan.streamlit.app/) .
 
+## CycleGAN training losses
+![Training losses](newplot.png)
+
 ## Credits 
  
 - **pytorch-CycleGAN-and-pix2pix:** 
