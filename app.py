@@ -153,7 +153,7 @@ if st.session_state.button2_clicked:
                     python_path,
                     "CycleGAN/test.py",
                     "--dataroot", "./input/horse2zebra/testB",
-                    "--checkpoints_dir", "./CycleGAN/checkpoints",
+                    "--checkpoints_dir", "./checkpoints",
                     "--name", "h2z_2_cyclegan",
                     "--model", "test",
                     "--no_dropout",
