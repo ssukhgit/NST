@@ -136,6 +136,11 @@ if st.session_state.button2_clicked:
             with st.spinner("Processing..."):
                 # 1. Save the uploaded image to CycleGAN/input/ so CycleGAN can read it
                 input_image_path = "input/horse2zebra/testB/test.jpg"
+
+                # Ensure the directory exists
+                output_dir = os.path.dirname(input_image_path)
+                os.makedirs(output_dir, exist_ok=True)
+
                 with open(input_image_path, "wb") as f:
                     f.write(uploaded_file.getvalue())
                     
