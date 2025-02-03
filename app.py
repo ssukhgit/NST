@@ -29,8 +29,10 @@ config = {
 st.title("Neural Style Transfer App")
 
 text_block = """
-This app allows you to perform neural style transfer using the Whitening and Coloring Transform (WCT) and CycleGAN algorithms. 
-Press 'Transfer any style to any image' to transfer the style of one image to another, or 'Transform zebra 🦓 to horse 🐎' to convert a zebra image to a horse image using CycleGAN.
+This app allows you to perform neural style transfer using the Whitening and Coloring 
+Transform (WCT) and CycleGAN algorithms. Press 'Transfer any style to any image' to 
+transfer the style of one image to another, or 'Transform zebra 🦓 to horse 🐎' to 
+convert a zebra image to a horse image using CycleGAN.
 """
 
 st.write(text_block)
@@ -100,7 +102,7 @@ if st.session_state.button1_clicked:
         # Process Button
         if st.button("Generate Styled Image"):
             with st.spinner("Processing..."):
-                
+               
                 # Initialize WCT model with configuration to pass to style_transfer function
                 wct = WCT(config)
 
@@ -113,8 +115,12 @@ if st.session_state.button1_clicked:
 
                 # Display the result
                 output_image = to_pil_image(output_image.squeeze(0))
-                st.image(output_image, caption = "Styled Image", use_container_width = True)
-                
+                st.image(
+                    output_image,
+                    caption="Styled Image",
+                    use_container_width=True
+                )
+               
                 # Save button
                 buf = BytesIO()
                 output_image.save(buf, format="JPEG")
@@ -131,10 +137,14 @@ if st.session_state.button1_clicked:
 if st.session_state.button2_clicked:
 
     uploaded_file = st.file_uploader("Upload a zebra image", type=['jpg', 'jpeg', 'png'])
-    
+
     if uploaded_file is not None:
         # Show the user-uploaded image
-        st.image(uploaded_file, caption="Uploaded Zebra Image", use_container_width=True)
+        st.image(
+            uploaded_file,
+            caption="Uploaded Zebra Image",
+            use_container_width=True
+        )
 
         if st.button("Convert to Horse"):
             with st.spinner("Processing..."):
@@ -147,8 +157,7 @@ if st.session_state.button2_clicked:
 
                 with open(input_image_path, "wb") as f:
                     f.write(uploaded_file.getvalue())
-                    
-                
+
                 # 2. Call the CycleGAN test script.
                 #    Adjust the paths/args to match your model name and checkpoint directory.
                 python_path = sys.executable  # Ensure same Python environment
@@ -166,7 +175,7 @@ if st.session_state.button2_clicked:
                     "--gpu_ids", "-1"
                 ]
                 subprocess.run(command)
-                
+
                 # 3. The output image appears in:
                 #    CycleGAN/results/h2z_2_cyclegan/test_latest/images/test_fake_B.png
                 result_image_path = "results/h2z_2_cyclegan/test_latest/images/test_fake.png"
@@ -175,6 +184,10 @@ if st.session_state.button2_clicked:
                 if os.path.exists(result_image_path):
                     # 4. Load and display the generated horse image
                     result_image = Image.open(result_image_path)
-                    st.image(result_image, caption="Converted Horse Image", use_container_width=True)
+                    st.image(
+                        result_image,
+                        caption="Converted Horse Image",
+                        use_container_width=True
+                    )
                 else:
                     st.error("CycleGAN did not produce an output image. Check the console for errors.")

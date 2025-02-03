@@ -1,10 +1,8 @@
 from __future__ import division
 import torch
-from WCT.modelsNIPS import decoder1,decoder2,decoder3,decoder4,decoder5
-from WCT.modelsNIPS import encoder1,encoder2,encoder3,encoder4,encoder5
+from WCT.modelsNIPS import decoder1, decoder2, decoder3, decoder4, decoder5
+from WCT.modelsNIPS import encoder1, encoder2, encoder3, encoder4, encoder5
 import torch.nn as nn
-
-
 
 class WCT(nn.Module):
     def __init__(self, config):
@@ -20,7 +18,6 @@ class WCT(nn.Module):
         decoder4_torch = torch.load(config['decoder4'])
         vgg5 = torch.load(config['vgg5'])
         decoder5_torch = torch.load(config['decoder5'])
-
 
         self.e1 = encoder1(vgg1)
         self.d1 = decoder1(decoder1_torch)
