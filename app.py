@@ -1,3 +1,15 @@
+""""
+This is the main Streamlit app file that contains the code for the neural style transfer app.
+The app does the following:
+1. Allows the user to upload a content and style image for neural style transfer.
+    1.1. Here, WCT (Whitening and Coloring Transform) is used to perform the style transfer.
+    1.2. Pre-trained VGG encoders and decoders are used for the WCT. The app calls the style_transfer function from the style_transfer.py file.
+2. Allows the user to upload a zebra image and convert it to a horse image using CycleGAN.
+    2.1. The app calls the CycleGAN test script to perform the image translation.
+    2.2. Test script uses the pre-trained generator from CycleGAN to convert the zebra image to a horse image.
+    2.3. The generator was trained from scratch locally using the horse2zebra dataset.
+"""
+
 import streamlit as st
 from PIL import Image
 from WCT.util import *
