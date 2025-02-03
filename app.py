@@ -28,6 +28,13 @@ config = {
 # Title
 st.title("Neural Style Transfer App")
 
+text_block = """
+This app allows you to perform neural style transfer using the Whitening and Coloring Transform (WCT) and CycleGAN algorithms. 
+Press 'Transfer any style to any image' to transfer the style of one image to another, or 'Transform zebra 🦓 to horse 🐎' to convert a zebra image to a horse image using CycleGAN.
+"""
+
+st.write(text_block)
+
 # Initialize session state for button tracking
 if "button1_clicked" not in st.session_state:
     st.session_state.button1_clicked = False
