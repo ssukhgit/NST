@@ -1,5 +1,8 @@
 # Neural Style Transfer with WCT & CycleGAN 
-This project combines state-of-the-art neural style transfer techniques using both [PytorchWCT](https://github.com/sunshineatnoon/PytorchWCT)  and [pytorch-CycleGAN-and-pix2pix](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix)  to produce impressive style transfer results. An interactive demo of the project is deployed on [Streamlit](https://styletransferwctcyclegan.streamlit.app/) .
+This project combines state-of-the-art neural style transfer techniques using both [PytorchWCT](https://github.com/sunshineatnoon/PytorchWCT)  and [pytorch-CycleGAN-and-pix2pix](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix)  to produce impressive style transfer results. An interactive demo of the project is deployed on [Streamlit](https://styletransferwctcyclegan.streamlit.app/). 
+
+A video demo can be found on [Youtube](https://youtu.be/-7Ehs1EDUq8).
+
 ## Overview 
 
 This project integrates two powerful approaches:
