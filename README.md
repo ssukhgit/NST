@@ -25,6 +25,11 @@ The app processes images on the fly and provides immediate visual feedback.
 - **Custom training:**
 CycleGAN has been trained, the resulting generator is stored in /checkpoints directory
 
+## Additional features
+
+- **Style Weight Slider**
+For WCT style transfer, the user can choose the style weight of the styled image using a slider
+
 ## Deployment 
 
 This project is deployed on Streamlit Cloud. Every time the repository is updated, the app is redeployed automatically. Files saved during runtime (e.g., user-uploaded images) are stored in an ephemeral container, so they will not persist across sessions.
